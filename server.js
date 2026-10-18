@@ -7,6 +7,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 
 import taskRoutes from "./routes/taskRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import { taskService } from "./service/taskService.js";
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/mcp_task_manager";
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 // Mount the REST API routes
+app.use("/api/auth", authRoutes);
 app.use("/api", taskRoutes);
 
 // Basic health check route
